@@ -72,13 +72,15 @@ module.exports = function(grunt) {
     languages.forEach(function(lng) {
         if(options.i18n){
           if(gt){
-              gt.textdomain(lng);
+            gt.textdomain(lng);
           }
-          i18n.configure({
-            locales: options.locales,
-            directory: options.directory,
-            defaultLocale: lng
-          });
+          else {
+            i18n.configure({
+              locales: options.locales,
+              directory: options.directory,
+              defaultLocale: lng
+            });
+          }
         }
         
         // Iterate over all specified file groups.
