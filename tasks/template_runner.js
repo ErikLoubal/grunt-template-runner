@@ -22,8 +22,9 @@ module.exports = function(grunt) {
       i18n: true,
       locales : [],
       directory: 'locales',
-      gettext: null,
       extension: null,
+      gettext: null,
+      gettext_suffix: 'mo',
       data: {},
       variable: null // Avoid underscore's template to use "with(...)"
     });
@@ -55,7 +56,7 @@ module.exports = function(grunt) {
           gt = new Gettext();
           var prefix = options.directory + '/' + options.gettext;
           options.locales.forEach(function(lng) {
-              var gtfile = prefix + '_' + lng + '.mo';
+              var gtfile = prefix + '_' + lng + '.' + options.gettext_suffix;
               if(grunt.file.exists(gtfile)){
                   var fileContents = fs.readFileSync(gtfile);
                   gt.addTextdomain(lng, fileContents);

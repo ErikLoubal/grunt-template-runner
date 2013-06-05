@@ -72,7 +72,8 @@ module.exports = function(grunt) {
           options: {
             locales: ['en', 'fr'],
             directory: 'test/gettext',
-            gettext: 'default'
+            gettext: 'default',
+            gettext_suffix: 'po'
           },
           files: {
             'tmp/fg/': ['test/fixtures/folder/test1.html', 
