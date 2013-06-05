@@ -1,7 +1,7 @@
 {
   "name": "grunt-template-runner",
   "description": "Runs templates and i18n at grunt's compile time.",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "homepage": "https://github.com/ErikLoubal/grunt-template-runner",
   "author": {
     "name": "Erik Loubal",

@@ -20,6 +20,8 @@ module.exports = function(grunt) {
       i18n: true,
       locales : [],
       directory: 'locales',
+      gettext: null,
+      extension: null,
       data: {},
       variable: null // Avoid underscore's template to use "with(...)"
     });
@@ -58,7 +60,7 @@ module.exports = function(grunt) {
         
         // Iterate over all specified file groups.
         files.forEach(function(f) {
-          // Concat specified files after template's execution
+          // Template's execution
           var src = f.src.filter(function(filepath) {
             // Warn on and remove invalid source files (if nonull was set).
             if (!grunt.file.exists(filepath)) {
@@ -73,21 +75,60 @@ module.exports = function(grunt) {
             var data = options.data;
             data._ = i18n.__;
             return compiled(data);
-          }).join('\n');
-    
-          
-          var d = f.dest;
-          if(options.i18n && lng.length > 0){
-            var idx = f.dest.lastIndexOf('.');
-            d = f.dest.slice(0, idx) + '_' + lng + f.dest.slice(idx);
+          });
+
+          // Build destination name
+          var folder = false;
+          if(grunt.file.isDir(f.dest) || f.dest.charAt(f.dest.length-1) === '/'){
+              folder = true; // if already an existing folder or ends with '/' : 
+                               // force folder output
           }
-          // Write the destination file.
-          grunt.file.write(d, src);
-    
-          // Print a success message.
-          grunt.log.writeln('File "' + d + '" created.');
+          else {
+              // If destination isn't a directory (ie. single file) : concatenate results 
+              src = src.join('\n');  
+          }
+          if(folder){
+              for(var i = 0; i < src.length; i++){
+                  var srcFile = f.src[i];
+                  var filename = f.dest + '/'; 
+                  if(options.i18n && lng.length > 0){
+                      filename += getOutputName(srcFile.replace(/^.*[\\\/]/, ''), lng, options.extension);
+                  } else {
+                      filename += getOutputName(srcFile.replace(/^.*[\\\/]/, ''), '', options.extension);
+                  }
+                  // Write the destination files.
+                  grunt.file.write(filename, src[i]);
+                  grunt.log.writeln('File "' + filename + '" created.');
+              }
+          } else {
+            var d = f.dest;
+            if(options.i18n && lng.length > 0){
+                d = getOutputName(f.dest, lng, options.extension);
+            }
+            // Write the destination file.
+            grunt.file.write(d, src);
+            grunt.log.writeln('File "' + d + '" created.');
+          }
         });
     });
   });
 
+  var getOutputName = function(n, lng, extension) {
+      var name = n;
+      var idx = n.lastIndexOf('.');
+      if(idx > -1){
+        if(extension || typeof extension === "string"){
+            name = n.slice(0, idx) + '_' + lng + extension;
+        } else {
+          name = n.slice(0, idx) + '_' + lng + n.slice(idx);
+        }
+      } else {
+          if(extension || typeof extension === "string"){
+          name = n + '_' + lng + extension;
+        } else {
+          name = n + '_' + lng;
+        }
+      }
+      return name;
+  };
 };

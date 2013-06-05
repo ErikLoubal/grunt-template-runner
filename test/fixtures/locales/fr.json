@@ -1,3 +1,6 @@
 {
-	"Hello": "Bonjour"
+	"Hello": "Bonjour",
+	"one": "un",
+	"two": "deux",
+	"three": "trois"
 }

@@ -48,6 +48,26 @@ module.exports = function(grunt) {
           'tmp/basic.html': ['test/fixtures/basic.html'],
         },
       },
+      no_extension: {
+          options: {
+            locales: ['en'],
+            directory: 'test/fixtures/locales'
+          },
+          files: {
+            'tmp/no_extension': ['test/fixtures/basic.html'],
+          },
+        },
+      folder: {
+        options: {
+          locales: ['en', 'fr'],
+          directory: 'test/fixtures/locales'
+        },
+        files: {
+          'tmp/folder/': ['test/fixtures/folder/test1.html', 
+                         'test/fixtures/folder/test2.hbs', 
+                         'test/fixtures/folder/test3.js'],
+        },
+      },
     },
 
     // Unit tests.
