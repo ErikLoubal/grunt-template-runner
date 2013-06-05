@@ -76,13 +76,42 @@ exports.template_runner = {
     expected = grunt.file.read('test/expected/folder/test2_fr.hbs');
     test.equal(actual, expected, 'should allow folders as destination');
     
-    actual = grunt.file.read('tmp/folder/test3_en.js');
-    expected = grunt.file.read('test/expected/folder/test3_en.js');
+    actual = grunt.file.read('tmp/folder/test3_en.md').trim();
+    expected = grunt.file.read('test/expected/folder/test3_en.md').trim();
     test.equal(actual, expected, 'should allow folders as destination');
     
-    actual = grunt.file.read('tmp/folder/test3_fr.js');
-    expected = grunt.file.read('test/expected/folder/test3_fr.js');
+    actual = grunt.file.read('tmp/folder/test3_fr.md').trim();
+    expected = grunt.file.read('test/expected/folder/test3_fr.md').trim();
     test.equal(actual, expected, 'should allow folders as destination');
+
+    test.done();
+  },
+  gettext: function(test) {
+    test.expect(6);
+
+    var actual = grunt.file.read('tmp/fg/test1_en.html');
+    var expected = grunt.file.read('test/expected/folder/test1_en.html');
+    test.equal(actual, expected, 'should use gettext for translation');
+    
+    actual = grunt.file.read('tmp/fg/test1_fr.html');
+    expected = grunt.file.read('test/expected/folder/test1_fr.html');
+    test.equal(actual, expected, 'should use gettext for translation');
+
+    actual = grunt.file.read('tmp/fg/test2_en.hbs');
+    expected = grunt.file.read('test/expected/folder/test2_en.hbs');
+    test.equal(actual, expected, 'should use gettext for translation');
+    
+    actual = grunt.file.read('tmp/fg/test2_fr.hbs');
+    expected = grunt.file.read('test/expected/folder/test2_fr.hbs');
+    test.equal(actual, expected, 'should use gettext for translation');
+    
+    actual = grunt.file.read('tmp/fg/test3_en.md').trim();
+    expected = grunt.file.read('test/expected/folder/test3_en.md').trim();
+    test.equal(actual, expected, 'should use gettext for translation');
+    
+    actual = grunt.file.read('tmp/fg/test3_fr.md').trim();
+    expected = grunt.file.read('test/expected/folder/test3_fr.md').trim();
+    test.equal(actual, expected, 'should use gettext for translation');
 
     test.done();
   },
