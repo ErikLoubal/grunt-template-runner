@@ -2,6 +2,9 @@
 
 > Runs i18n and template engine at grunt's compile time.
 
+## Goal
+Simple source file translation tool at grunt's compile time : any source file (no matter its format) may be easily translated using [i18n-node](https://github.com/mashpie/i18n-node) or [node-gettext](https://github.com/andris9/node-gettext).
+
 ## Getting Started
 This plugin requires Grunt `~0.4.1`
 
@@ -39,6 +42,8 @@ grunt.initConfig({
   },
 })
 ```
+> #### Destination folder
+> If the destination isn't a file name but a folder name (either a trailing '/' or the name of an existing folder) each input file will result in the generation of a new destination file for each specified language (see folder example below). 
 
 ### Options
 
@@ -52,7 +57,25 @@ Additional manual data which may be provided as template source data.
 Type: `String`
 Default value: `locales`
 
-Specifies directory where sources json translation data files will be read.
+Specifies directory where sources json translation data files will be read. For [i18n-node](https://github.com/mashpie/i18n-node) this directory should contain translation data for each language in a file named _language_.json (eg. en.json). For [node-gettext](https://github.com/andris9/node-gettext) this directory should contain translation data for each language in a file named prefix_language.json with prefix as `gettext` option value and language as language code (eg. default_de.json)
+
+#### extension
+Type: `String`
+Default value: `null`
+
+If not null, this extension will override file extension for all generated files.
+
+#### gettext
+Type: `String`
+Default value: `null`
+
+Defines gettext prefix files. If null gettext isn't use an default i18n-node is used.
+
+#### gettext_suffix
+Type: `String`
+Default value: `mo`
+
+Defines gettext suffix (extension). May be either `mo` to use binary `.mo` or `po` to use `.po` files.
 
 #### i18n
 Type: `Boolean`
@@ -101,6 +124,46 @@ grunt.initConfig({
 })
 ```
 
+---
+#### Destination folder
+This is basically the same example as the last one despite the destination file is a folder name.
+As the destination isn't a single file, each source file will generate a new file in the destination folder. Eg. for configuration below both `basic_en.html` and `another_en.hbs` will be created in the `dest` folder.
+
+```js
+grunt.initConfig({
+  template_runner: {
+    options: {
+      locales: ['en'],
+      directory: 'locales'
+    },
+    files: {
+      'dest/': ['src/basic.html', 'src/another.hbs'],
+    },
+  },
+})
+```
+
+---
+#### Gettext
+This example shows how to use gettext's mo translation files. The `gettext` option defines the name of files to load in the translation directory. Defaults behavior uses `.mo` gettext binary files, in this example the `gettext_suffix` option is set in order to use `.po`.
+
+```js
+grunt.initConfig({
+  template_runner: {
+    options: {
+      locales: ['en', 'fr'],
+      directory: 'locales',
+      gettext: 'default',
+      gettext_suffix: 'po'
+    },
+    files: {
+      'dest/': ['src/basic.html', 'src/another.hbs'],
+    },
+  },
+})
+```
+
+---
 #### Bare template
 In this example, the bare [Underscore template](http://underscorejs.org/#template) is used, usage of bare templating isn't the most useful part of this plugin but it's still here.
 The mandatory part in to disable internationalization by using `i18n: false` option.
@@ -125,4 +188,6 @@ grunt.initConfig({
 In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [Grunt](http://gruntjs.com/).
 
 ## Release History
-_(Nothing yet)_
+0.2.0 - Add gettext usage.
+0.1.1 - Add internationalization.
+0.1.0 - Initial version.
