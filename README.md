@@ -79,15 +79,13 @@ Optional [Underscore's template variable](http://underscorejs.org/#template) att
 In this example, an i18n mechanism is used at grunt's compile time using files containing simple gettext like tags.
 It internally uses [i18n-node](https://github.com/mashpie/i18n-node) to provide translations.
 Here is a sample execution case of the following configuration :
- * if the `src/basic.html` contains some html with included translations : `<div>Title _('Hello')</div>`
- * and if the `locales` directory contains only a `fr.json` translation file containing :
-```json
-{
-  "Hello": "Bonjour"
-}
-```
- * then this configuration will generate two destination files containing translated content :
 
+ *  if the `src/basic.html` contains some html with included translations : `<div>Title _('Hello')</div>`
+ *  and if the `locales` directory contains only a `fr.json` translation file containing :
+`{ "Hello": "Bonjour" }`
+ * then this configuration will generate two destination files containing translated content :
+ * basic_en.html containing : `<div>Title Hello</div>`
+ * basic_fr.html containing : `<div>Title Bonjour</div>`
 
 ```js
 grunt.initConfig({
