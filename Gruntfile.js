@@ -68,6 +68,17 @@ module.exports = function(grunt) {
                           'test/fixtures/folder/test3.md'],
         },
       },
+      language_directories: {
+        options: {
+          locales: ['en', 'fr'],
+          directory: 'test/fixtures/locales',
+          directory_per_locale: true,
+          output_directory: 'tmp',
+        },
+        files: {
+          'test1.html': 'test/fixtures/folder/test1.html'
+        }
+      },
       gettext: {
           options: {
             locales: ['en', 'fr'],

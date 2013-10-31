@@ -26,7 +26,9 @@ module.exports = function(grunt) {
       gettext: null,
       gettext_suffix: 'mo',
       data: {},
-      variable: null // Avoid underscore's template to use "with(...)"
+      variable: null, // Avoid underscore's template to use "with(...)"
+      directory_per_locale: false,
+      output_directory: false
     });
     grunt.verbose.writeflags(options, 'Options');
     
@@ -66,7 +68,7 @@ module.exports = function(grunt) {
           });
       }
     }
-    
+
     var languages = (options.locales.length < 1) ? [''] : options.locales;
     var files = this.files;
     // For each language
@@ -84,6 +86,7 @@ module.exports = function(grunt) {
           }
         }
         
+
         // Iterate over all specified file groups.
         files.forEach(function(f) {
           // Template's execution
@@ -133,9 +136,21 @@ module.exports = function(grunt) {
                   grunt.log.writeln('File "' + filename + '" created.');
               }
           } else {
-            var d = f.dest;
-            if(options.i18n && lng.length > 0){
-                d = getOutputName(f.dest, lng, options.extension);
+            
+            if (options.directory_per_locale) {
+              var alt_output = "";
+              if (options.output_directory) {
+                alt_output = options.output_directory + '/';
+              }
+              if (options.directory_per_locale) {
+                var d = alt_output + lng + '/' + f.dest;
+              }
+            }
+            else {
+              var d = f.dest;
+              if(options.i18n && lng.length > 0){
+                  d = getOutputName(f.dest, lng, options.extension);
+              }
             }
             // Write the destination file.
             grunt.file.write(d, src);

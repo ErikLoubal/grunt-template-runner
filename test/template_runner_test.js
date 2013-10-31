@@ -86,6 +86,19 @@ exports.template_runner = {
 
     test.done();
   },
+  language_directories: function (test) {
+    test.expect(2);
+
+    var actual = grunt.file.read('tmp/en/test1.html');
+    var expected = grunt.file.read('test/expected/language_directories/en/test1.html');
+    test.equal(actual, expected, 'should allow user to specify own directory output');
+    
+    var actual = grunt.file.read('tmp/fr/test1.html');
+    var expected = grunt.file.read('test/expected/language_directories/fr/test1.html');
+    test.equal(actual, expected, 'should allow user to specify own directory output');
+
+    test.done();
+  },
   gettext: function(test) {
     test.expect(6);
 
