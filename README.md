@@ -100,6 +100,12 @@ Default value: ''
 Optional path relative from your grunt file where your templates reside.  This is useful if you are creating multiple files and do not want to repeat the template directory path many times.
 
 
+### Special variables
+
+When the templates run, there are additional template variables available that are not defined by the vocab or options.data object.  This are:
+
+`<%= vocab_dir %>` - name of directory template is being rendered into, e.g. 'english'.
+
 ## Thanks
 
 This project was originally forked from Erik Loubal's [grunt-template-runner](https://github.com/ErikLoubal/grunt-template-runner).  This didn't quite do what I wanted it to do, but was an excellent starting point.  This project would have taken MUCH longer with grunt-template-runner, thank you Erik.
