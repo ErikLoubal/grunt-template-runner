@@ -45,7 +45,7 @@ foo: "bar"
 <p><%= foo %></p>
 ```
 
-It uses (lodash's template engine)[http://lodash.com/docs#template].
+It uses [lodash's template engine](http://lodash.com/docs#template).
 
 ## Getting Started
 This plugin requires Grunt `~0.4.1`
@@ -88,13 +88,13 @@ Default value: ''
 Optional directory to output the language sites to.  By default an 'english' translated site will be created next to your grunt file.  If you wanted it to be created in a 'site' directory, set `output_directory` to 'site'.
 
 #### data
-Type: 'JSON'
+Type: `JSON`
 Default value: `{}`
 
 Optional additional data to pass into the template.  This is useful for data values you want to pass into the templates that are common for each site, e.g. domain values for assets.
 
 #### template_directory
-Type: 'String'
+Type: `String`
 Default value: ''
 
 Optional path relative from your grunt file where your templates reside.  This is useful if you are creating multiple files and do not want to repeat the template directory path many times.
@@ -102,4 +102,4 @@ Optional path relative from your grunt file where your templates reside.  This i
 
 ## Thanks
 
-This project was originally forked from Erik Loubal's (grunt-template-runner)[https://github.com/ErikLoubal/grunt-template-runner].  This didn't quite do what I wanted it to do, but was an excellent starting point.  This project would have taken MUCH longer with grunt-template-runner, thank you Erik.
+This project was originally forked from Erik Loubal's [grunt-template-runner](https://github.com/ErikLoubal/grunt-template-runner).  This didn't quite do what I wanted it to do, but was an excellent starting point.  This project would have taken MUCH longer with grunt-template-runner, thank you Erik.
