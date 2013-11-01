@@ -1,11 +1,3 @@
-/*
- * grunt-template-runner
- * https://github.com/ErikLoubal/grunt-template-runner
- *
- * Copyright (c) 2013 Erik Loubal
- * Licensed under the MIT license.
- */
-
 'use strict';
 
 module.exports = function(grunt) {
@@ -25,73 +17,56 @@ module.exports = function(grunt) {
 
     // Before generating any new files, remove any previously-created files.
     clean: {
-      tests: ['tmp'],
+      tests: ['test/output'],
     },
 
     // Configuration to be run (and then tested).
     template_runner: {
-      bare_template: {
+      vocabs_to_sites: {
         options: {
-          i18n: false,
-          data: {name : 'content'}
+          vocabs:           ['english', 'mundo'],
+          vocab_directory:  'test/fixtures/vocabs',
+          output_directory: 'test/output/vocabs_to_sites',
         },
         files: {
-          'tmp/default.txt': ['test/fixtures/default.txt'],
-        },
-      },
-      basic_i18n: {
-        options: {
-          locales: ['en', 'fr'],
-          directory: 'test/fixtures/locales'
-        },
-        files: {
-          'tmp/basic.html': ['test/fixtures/basic.html'],
-        },
-      },
-      no_extension: {
-          options: {
-            locales: ['en'],
-            directory: 'test/fixtures/locales'
-          },
-          files: {
-            'tmp/no_extension': ['test/fixtures/basic.html'],
-          },
-        },
-      folder: {
-        options: {
-          locales: ['en', 'fr'],
-          directory: 'test/fixtures/locales'
-        },
-        files: {
-          'tmp/folder/': ['test/fixtures/folder/test1.html', 
-                          'test/fixtures/folder/test2.hbs', 
-                          'test/fixtures/folder/test3.md'],
-        },
-      },
-      language_directories: {
-        options: {
-          locales: ['en', 'fr'],
-          directory: 'test/fixtures/locales',
-          directory_per_locale: true,
-          output_directory: 'tmp',
-        },
-        files: {
-          'test1.html': 'test/fixtures/folder/test1.html'
+          'index.html': ['test/fixtures/templates/index.html.tmpl']
         }
       },
-      gettext: {
-          options: {
-            locales: ['en', 'fr'],
-            directory: 'test/gettext',
-            gettext: 'default',
-            gettext_suffix: 'po'
-          },
-          files: {
-            'tmp/fg/': ['test/fixtures/folder/test1.html', 
-                        'test/fixtures/folder/test2.hbs', 
-                        'test/fixtures/folder/test3.md'],
-          },
+      extra_data_to_sites: {
+        options: {
+          vocabs:           ['english', 'mundo'],
+          vocab_directory:  'test/fixtures/vocabs',
+          output_directory: 'test/output/extra_data',
+          data: {
+            "foo": "bar"
+          }
         },
+        files: {
+          'index.html': 'test/fixtures/templates/extra_data.html.tmpl'
+        }
+      },
+      multiple_files: {
+        options: {
+          vocabs:           ['english'],
+          vocab_directory:  'test/fixtures/vocabs',
+          output_directory: 'test/output/multiple_files'
+        },
+        files: {
+          'index.html': 'test/fixtures/templates/index.html.tmpl',
+          'page.html':  'test/fixtures/templates/page.html.tmpl'
+        }
+      },
+      template_directory_option: {
+        options: {
+          vocabs:             ['english'],
+          vocab_directory:    'test/fixtures/vocabs',
+          output_directory:   'test/output/template_directory_option',
+          template_directory: 'test/fixtures/templates/'
+        },
+        files: {
+          'index.html': 'index.html.tmpl'
+        }
+      }
     },
 
     // Unit tests.
@@ -115,5 +90,7 @@ module.exports = function(grunt) {
 
   // By default, lint and run all tests.
   grunt.registerTask('default', ['jshint', 'test']);
+
+  grunt.registerTask('tommy', ['template_runner:test']);
 
 };

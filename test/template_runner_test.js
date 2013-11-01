@@ -26,106 +26,52 @@ exports.template_runner = {
   setUp: function(done) {
     done();
   },
-  default_text: function(test) {
-    test.expect(1);
-
-    var actual = grunt.file.read('tmp/default.txt');
-    var expected = grunt.file.read('test/expected/default.txt');
-    test.equal(actual, expected, 'should use bare replacement in plain text template.');
-
-    test.done();
-  },
-  basic_i18n: function(test) {
+  vocabs_to_sites: function (test) {
     test.expect(2);
 
-    var actual = grunt.file.read('tmp/basic_en.html');
-    var expected = grunt.file.read('test/expected/basic_en.html');
-    test.equal(actual, expected, 'should use default key string as i18n.');
+    var actual =   grunt.file.read('test/output/vocabs_to_sites/english/index.html');
+    var expected = grunt.file.read('test/expected/vocabs_to_sites/english/index.html');
+    test.equal(actual, expected, 'should create an english version of the site');
     
-    actual = grunt.file.read('tmp/basic_fr.html');
-    expected = grunt.file.read('test/expected/basic_fr.html');
-    test.equal(actual, expected, 'should apply i18n (fr).');
+    var actual =   grunt.file.read('test/output/vocabs_to_sites/mundo/index.html');
+    var expected = grunt.file.read('test/expected/vocabs_to_sites/mundo/index.html');
+    test.equal(actual, expected, 'should create a mundo version of the site');
 
     test.done();
   },
-  no_extension: function(test) {
-    test.expect(1);
-
-    var actual = grunt.file.read('tmp/no_extension_en');
-    var expected = grunt.file.read('test/expected/no_extension_en');
-    test.equal(actual, expected, 'should allow destination file without extension.');
-
-    test.done();
-  },
-  folders: function(test) {
-    test.expect(6);
-
-    var actual = grunt.file.read('tmp/folder/test1_en.html');
-    var expected = grunt.file.read('test/expected/folder/test1_en.html');
-    test.equal(actual, expected, 'should allow folders as destination');
-    
-    actual = grunt.file.read('tmp/folder/test1_fr.html');
-    expected = grunt.file.read('test/expected/folder/test1_fr.html');
-    test.equal(actual, expected, 'should allow folders as destination');
-
-    actual = grunt.file.read('tmp/folder/test2_en.hbs');
-    expected = grunt.file.read('test/expected/folder/test2_en.hbs');
-    test.equal(actual, expected, 'should allow folders as destination');
-    
-    actual = grunt.file.read('tmp/folder/test2_fr.hbs');
-    expected = grunt.file.read('test/expected/folder/test2_fr.hbs');
-    test.equal(actual, expected, 'should allow folders as destination');
-    
-    actual = grunt.file.read('tmp/folder/test3_en.md').trim();
-    expected = grunt.file.read('test/expected/folder/test3_en.md').trim();
-    test.equal(actual, expected, 'should allow folders as destination');
-    
-    actual = grunt.file.read('tmp/folder/test3_fr.md').trim();
-    expected = grunt.file.read('test/expected/folder/test3_fr.md').trim();
-    test.equal(actual, expected, 'should allow folders as destination');
-
-    test.done();
-  },
-  language_directories: function (test) {
+  extra_data: function (test) {
     test.expect(2);
 
-    var actual = grunt.file.read('tmp/en/test1.html');
-    var expected = grunt.file.read('test/expected/language_directories/en/test1.html');
-    test.equal(actual, expected, 'should allow user to specify own directory output');
+    var actual =   grunt.file.read('test/output/extra_data/english/index.html');
+    var expected = grunt.file.read('test/expected/extra_data/english/index.html');
+    test.equal(actual, expected, 'should create an english version of the site with extra data from the grunt file');
     
-    var actual = grunt.file.read('tmp/fr/test1.html');
-    var expected = grunt.file.read('test/expected/language_directories/fr/test1.html');
-    test.equal(actual, expected, 'should allow user to specify own directory output');
+    var actual =   grunt.file.read('test/output/extra_data/mundo/index.html');
+    var expected = grunt.file.read('test/expected/extra_data/mundo/index.html');
+    test.equal(actual, expected, 'should create a mundo version of the site with extra data from the grunt file');
 
     test.done();
   },
-  gettext: function(test) {
-    test.expect(6);
+  multiple_files: function (test) {
+    test.expect(2);
 
-    var actual = grunt.file.read('tmp/fg/test1_en.html');
-    var expected = grunt.file.read('test/expected/folder/test1_en.html');
-    test.equal(actual, expected, 'should use gettext for translation');
+    var actual =   grunt.file.read('test/output/multiple_files/english/index.html');
+    var expected = grunt.file.read('test/expected/multiple_files/english/index.html');
+    test.equal(actual, expected, 'should create an index file');
     
-    actual = grunt.file.read('tmp/fg/test1_fr.html');
-    expected = grunt.file.read('test/expected/folder/test1_fr.html');
-    test.equal(actual, expected, 'should use gettext for translation');
-
-    actual = grunt.file.read('tmp/fg/test2_en.hbs');
-    expected = grunt.file.read('test/expected/folder/test2_en.hbs');
-    test.equal(actual, expected, 'should use gettext for translation');
-    
-    actual = grunt.file.read('tmp/fg/test2_fr.hbs');
-    expected = grunt.file.read('test/expected/folder/test2_fr.hbs');
-    test.equal(actual, expected, 'should use gettext for translation');
-    
-    actual = grunt.file.read('tmp/fg/test3_en.md').trim();
-    expected = grunt.file.read('test/expected/folder/test3_en.md').trim();
-    test.equal(actual, expected, 'should use gettext for translation');
-    
-    actual = grunt.file.read('tmp/fg/test3_fr.md').trim();
-    expected = grunt.file.read('test/expected/folder/test3_fr.md').trim();
-    test.equal(actual, expected, 'should use gettext for translation');
+    var actual =   grunt.file.read('test/output/multiple_files/english/page.html');
+    var expected = grunt.file.read('test/expected/multiple_files/english/page.html');
+    test.equal(actual, expected, 'should create a page file');
 
     test.done();
   },
+  template_directory_option: function (test) {
+    test.expect(1);
+
+    var actual =   grunt.file.read('test/output/template_directory_option/english/index.html');
+    var expected = grunt.file.read('test/expected/template_directory_option/english/index.html');
+    test.equal(actual, expected, 'should create an index file');
+
+    test.done();
+  }
 };
