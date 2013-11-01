@@ -4,7 +4,7 @@ module.exports = function(grunt) {
 
   var _ = require("lodash");
 
-  grunt.registerMultiTask('template_runner', 'Create multiple translated sites based on templates and vocab json objects.', function() {
+  grunt.registerMultiTask('multi_lang_site_generator', 'Create multiple translated sites based on templates and vocab json objects.', function() {
     var options = this.options({
       vocabs : [],
       data: {},

@@ -1,5 +1,5 @@
 {
-  "name": "grunt-template-runner",
+  "name": "grunt-multi-lang-site-generator",
   "description": "Runs templates and i18n at grunt's compile time.",
   "version": "0.1.0",
   "homepage": "git@github.com:maslen/grunt-template-runner.git",
@@ -9,10 +9,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/maslen/grunt-template-runner.git"
+    "url": "https://github.com/maslen/grunt-multi-lang-site-generator.git"
   },
   "bugs": {
-    "url": "https://github.com/maslen/grunt-template-runner/issues"
+    "url": "https://github.com/maslen/grunt-multi-lang-site-generator/issues"
   },
   "main": "Gruntfile.js",
   "engines": {

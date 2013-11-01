@@ -21,7 +21,7 @@ module.exports = function(grunt) {
     },
 
     // Configuration to be run (and then tested).
-    template_runner: {
+    multi_lang_site_generator: {
       vocabs_to_sites: {
         options: {
           vocabs:           ['english', 'mundo'],
@@ -86,11 +86,9 @@ module.exports = function(grunt) {
 
   // Whenever the "test" task is run, first clean the "tmp" dir, then run this
   // plugin's task(s), then test the result.
-  grunt.registerTask('test', ['clean', 'template_runner', 'nodeunit']);
+  grunt.registerTask('test', ['clean', 'multi_lang_site_generator', 'nodeunit']);
 
   // By default, lint and run all tests.
   grunt.registerTask('default', ['jshint', 'test']);
-
-  grunt.registerTask('tommy', ['template_runner:test']);
 
 };

@@ -1,9 +1,37 @@
-# grunt-template-runner
+# grunt-multi-lang-site-generator
 
-> Runs i18n and template engine at grunt's compile time.
+Creates multiple language versions of a site based on vocab JSON files and templates.  Example:
 
-## Goal
-Simple source file translation tool at grunt's compile time : any source file (no matter its format) may be easily translated using [i18n-node](https://github.com/mashpie/i18n-node) or [node-gettext](https://github.com/andris9/node-gettext).
+```
+grunt.initConfig({
+  multi_lang_site_generator: {
+    default: {
+      options: {
+        vocabs:           ['english', 'mundo'],
+        vocab_directory:  'vocabs'
+      },
+      files: {
+        'index.html': ['templates/index.html.tmpl']
+      }
+    }
+  }
+});
+```
+
+Will take vocab objects and templates:
+
+```
+templates/index.html.tmpl
+vocabs/english.json
+vocabs/mundo.json
+```
+
+And create the following output:
+
+```
+english/index.html
+mundo/index.html
+```
 
 ## Getting Started
 This plugin requires Grunt `~0.4.1`
@@ -11,184 +39,53 @@ This plugin requires Grunt `~0.4.1`
 If you haven't used [Grunt](http://gruntjs.com/) before, be sure to check out the [Getting Started](http://gruntjs.com/getting-started) guide, as it explains how to create a [Gruntfile](http://gruntjs.com/sample-gruntfile) as well as install and use Grunt plugins. Once you're familiar with that process, you may install this plugin with this command:
 
 ```shell
-npm install grunt-template-runner --save-dev
+npm install grunt-multi-lang-site-generator --save-dev
 ```
 
 Once the plugin has been installed, it may be enabled inside your Gruntfile with this line of JavaScript:
 
 ```js
-grunt.loadNpmTasks('grunt-template-runner');
+grunt.loadNpmTasks('grunt-multi-lang-site-generator');
 ```
 
-## The "template_runner" task
+## The "multi-lang-site-generator" task
 _Run this task with the `grunt less` command._
 
 Task targets, files and options may be specified according to the grunt [Configuring tasks](http://gruntjs.com/configuring-tasks) guide.
 
-### Overview
-In your project's Gruntfile, add a section named `template_runner` to the data object passed into `grunt.initConfig()`.
-
-```js
-grunt.initConfig({
-  template_runner: {
-    basic: {
-      options: {
-        // Task-specific options go here.
-      },
-      files: {
-        // Target-specific file lists go here.
-      },
-    },
-  },
-})
-```
-> #### Destination folder
-> If the destination isn't a file name but a folder name (either a trailing '/' or the name of an existing folder) each input file will result in the generation of a new destination file for each specified language (see folder example below). 
-
 ### Options
 
-#### data
-Type: `JSON`
+#### vocab
+Type: `Array`
 Default value: `{}`
 
-Additional manual data which may be provided as template source data.
+Mandatory list of languages to use to make a translated site with.  Each item in the array must correspond to a JSON file in the vocab directory.  Each item label will be used to name the language site directory with.
 
-#### directory
+#### vocab_directory
 Type: `String`
-Default value: `locales`
+Default value: ''
 
-Specifies directory where sources json translation data files will be read. For [i18n-node](https://github.com/mashpie/i18n-node) this directory should contain translation data for each language in a file named _language_.json (eg. en.json). For [node-gettext](https://github.com/andris9/node-gettext) this directory should contain translation data for each language in a file named prefix_language.json with prefix as `gettext` option value and language as language code (eg. default_de.json)
+Mandatory path relative from your grunt file where your vocab JSON files reside. 
 
-#### extension
+#### output_directory
 Type: `String`
-Default value: `null`
+Default value: ''
 
-If not null, this extension will override file extension for all generated files.
+Optional directory to output the language sites to.  By default an 'english' translated site will be created next to your grunt file.  If you wanted it to be created in a 'site' directory, set `output_directory` to 'site'.
 
-#### gettext
-Type: `String`
-Default value: `null`
+#### data
+Type: 'JSON'
+Default value: `{}`
 
-Defines gettext prefix files. If null gettext isn't use an default i18n-node is used.
+Optional additional data to pass into the template.  This is useful for data values you want to pass into the templates that are common for each site, e.g. domain values for assets.
 
-#### gettext_suffix
-Type: `String`
-Default value: `mo`
+#### template_directory
+Type: 'String'
+Default value: ''
 
-Defines gettext suffix (extension). May be either `mo` to use binary `.mo` or `po` to use `.po` files.
-
-#### i18n
-Type: `Boolean`
-Default value: `true`
-
-If true internationalization will be used, otherwise the bare templating rendering is used.
-
-#### locales
-Type: `String|Array`
-Default value: `[]`
-
-Defines the list of all availables locales (ie. languages).
-
-#### variable
-Type: `String`
-Default value: `null`
-
-Optional [Underscore's template variable](http://underscorejs.org/#template) attribute.
+Optional path relative from your grunt file where your templates reside.  This is useful if you are creating multiple files and do not want to repeat the template directory path many times.
 
 
-### Usage Examples
+## Thanks
 
-#### Internationalization
-In this example, an i18n mechanism is used at grunt's compile time using files containing simple gettext like tags.
-It internally uses [i18n-node](https://github.com/mashpie/i18n-node) to provide translations.
-Here is a sample execution case of the following configuration :
-
- *  if the `src/basic.html` contains some html with included translations : `<div>Title _('Hello')</div>`
- *  and if the `locales` directory contains only a `fr.json` translation file containing :
-`{ "Hello": "Bonjour" }`
- * then this configuration will generate two destination files containing translated content :
- * basic_en.html containing : `<div>Title Hello</div>`
- * basic_fr.html containing : `<div>Title Bonjour</div>`
-
-```js
-grunt.initConfig({
-  template_runner: {
-    options: {
-      locales: ['en', 'fr'],
-      directory: 'locales'
-    },
-    files: {
-      'dest/basic.html': ['src/basic.html'],
-    },
-  },
-})
-```
-
----
-#### Destination folder
-This is basically the same example as the last one despite the destination file is a folder name.
-As the destination isn't a single file, each source file will generate a new file in the destination folder. Eg. for configuration below both `basic_en.html` and `another_en.hbs` will be created in the `dest` folder.
-
-```js
-grunt.initConfig({
-  template_runner: {
-    options: {
-      locales: ['en'],
-      directory: 'locales'
-    },
-    files: {
-      'dest/': ['src/basic.html', 'src/another.hbs'],
-    },
-  },
-})
-```
-
----
-#### Gettext
-This example shows how to use gettext's mo translation files. The `gettext` option defines the name of files to load in the translation directory. Defaults behavior uses `.mo` gettext binary files, in this example the `gettext_suffix` option is set in order to use `.po`.
-
-```js
-grunt.initConfig({
-  template_runner: {
-    options: {
-      locales: ['en', 'fr'],
-      directory: 'locales',
-      gettext: 'default',
-      gettext_suffix: 'po'
-    },
-    files: {
-      'dest/': ['src/basic.html', 'src/another.hbs'],
-    },
-  },
-})
-```
-
----
-#### Bare template
-In this example, the bare [Underscore template](http://underscorejs.org/#template) is used, usage of bare templating isn't the most useful part of this plugin but it's still here.
-The mandatory part in to disable internationalization by using `i18n: false` option.
-If input file contains an ERB string its contents gets updated using template data provided in the options. Eg.
-If source contains `Plain text template <%= name %>` the result of the following configuration should be `Plain text template Erik`.
-
-```js
-grunt.initConfig({
-  template_runner: {
-    options: {
-      i18n: false,
-      data: {name : 'Erik'}
-    },
-    files: {
-      'dest/myDest.txt': ['src/mySource.txt'],
-    },
-  },
-})
-```
-
-## Contributing
-In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [Grunt](http://gruntjs.com/).
-
-## Release History
-0.2.1 - Add gettext for both 'mo' and 'po'.
-0.2.0 - Add gettext usage.
-0.1.1 - Add internationalization.
-0.1.0 - Initial version.
+This project was originally forked from Erik Loubal's (grunt-template-runner)[https://github.com/ErikLoubal/grunt-template-runner].  This didn't quite do what I wanted it to do, but was an excellent starting point.  This project would have taken MUCH longer with grunt-template-runner, thank you Erik.
