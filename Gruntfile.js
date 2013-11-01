@@ -66,6 +66,16 @@ module.exports = function(grunt) {
         files: {
           'index.html': 'index.html.tmpl'
         }
+      },
+      special_variables: {
+        options: {
+          vocabs:             ['english'],
+          vocab_directory:    'test/fixtures/vocabs',
+          output_directory:   'test/output/special_variables'
+        },
+        files: {
+          'special_variables.html': 'test/fixtures/templates/special_variables.html.tmpl'
+        }
       }
     },
 

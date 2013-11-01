@@ -30,10 +30,13 @@ module.exports = function(grunt) {
         // Iterate over all specified file groups.
         files.forEach(function(f) {
 
-          var vocab_data = JSON.parse(grunt.file.read(options.vocab_directory + '/' + lng + '.json')),
-              data       = _.merge(options.data, vocab_data),
-              src        = _.template(grunt.file.read(options.template_directory + f.orig.src[0]), data),
-              dest       = '';
+          var vocab_data        = JSON.parse(grunt.file.read(options.vocab_directory + '/' + lng + '.json')),
+              special_variables = {
+                vocab_dir: lng
+              },
+              data              = _.merge(options.data, vocab_data, special_variables),
+              src               = _.template(grunt.file.read(options.template_directory + f.orig.src[0]), data),
+              dest              = '';
 
             if (options.output_directory) {
               dest = options.output_directory + '/';

@@ -73,5 +73,14 @@ exports.template_runner = {
     test.equal(actual, expected, 'should create an index file');
 
     test.done();
+  },
+  special_variables: function (test) {
+    test.expect(1);
+
+    var actual =   grunt.file.read('test/output/special_variables/english/special_variables.html');
+    var expected = grunt.file.read('test/expected/special_variables/english/special_variables.html');
+    test.equal(actual, expected, 'should create an index file');
+
+    test.done();
   }
 };
