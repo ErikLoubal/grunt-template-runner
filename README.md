@@ -33,6 +33,20 @@ english/index.html
 mundo/index.html
 ```
 
+The vocab objects are JSON, each property corresponds to a variable in the template file...
+
+```
+{
+foo: "bar"
+}
+```
+
+```
+<p><%= foo %></p>
+```
+
+It uses (lodash's template engine)[http://lodash.com/docs#template].
+
 ## Getting Started
 This plugin requires Grunt `~0.4.1`
 
