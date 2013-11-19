@@ -2,14 +2,25 @@
 
 module.exports = function(grunt) {
 
-  var _ = require("lodash");
+  var _  = require("lodash"),
+      fs = require("fs");
+
+  function add_forward_slash_to_end_of_dir_paths (options) {
+    if (
+      (options.template_directory !== '') && 
+      (options.template_directory.substr(-1) !== '/')
+    ) {
+      options.template_directory += '/';
+    }
+  }
 
   grunt.registerMultiTask('multi_lang_site_generator', 'Create multiple translated sites based on templates and vocab json objects.', function() {
     var options = this.options({
-      vocabs : [],
-      data: {},
-      output_directory: false,
-      template_directory: ''
+      vocabs :            [],
+      data:               {},
+      output_directory:   false,
+      template_directory: '',
+      sub_templates:      ''
     });
     grunt.verbose.writeflags(options, 'Options');
     
@@ -20,6 +31,19 @@ module.exports = function(grunt) {
 
     if (this.files.length < 1) {
       grunt.log.warn('Destination not written because no source files were provided.');
+    }
+
+    add_forward_slash_to_end_of_dir_paths(options);
+
+    if (options.sub_templates != '') {
+      options.sub_templates.forEach(function (sub_template) {
+        var content       = fs.readFileSync(options.template_directory + sub_template),
+            template_name = sub_template.replace(/\//g, "_");
+        if (template_name.indexOf(".") > -1) {
+          template_name = template_name.split(".")[0];
+        }
+        options.data[template_name] = content.toString();
+      });
     }
 
     var languages = (options.vocabs.length < 1) ? [''] : options.vocabs;

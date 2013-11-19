@@ -77,10 +77,20 @@ exports.template_runner = {
   special_variables: function (test) {
     test.expect(1);
 
-    var actual =   grunt.file.read('test/output/special_variables/english/special_variables.html');
+    var actual   = grunt.file.read('test/output/special_variables/english/special_variables.html');
     var expected = grunt.file.read('test/expected/special_variables/english/special_variables.html');
     test.equal(actual, expected, 'should create an index file');
 
     test.done();
+  },
+  sub_templates: function (test) {
+    test.expect(1);
+
+    var actual   = grunt.file.read('test/output/sub_templates/english/index.html');
+    var expected = grunt.file.read('test/expected/sub_templates/english/index.html');
+    test.equal(actual, expected, 'should include sub templates and render content');
+
+    test.done();
   }
+  // ADD A TEST FOR VOCAB DIRECTORY
 };
