@@ -30,7 +30,7 @@ module.exports = function(grunt) {
     var options = this.options({
       vocabs :            [],
       data:               {},
-      output_directory:   false,
+      output_directory:   '',
       template_directory: '',
       sub_templates:      '',
       vocab_directory:    ''
