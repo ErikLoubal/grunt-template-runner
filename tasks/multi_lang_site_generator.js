@@ -47,17 +47,6 @@ module.exports = function(grunt) {
 
     add_forward_slash_to_end_of_dir_paths(options);
 
-    if (options.sub_templates != '') {
-      options.sub_templates.forEach(function (sub_template) {
-        var content       = fs.readFileSync(options.template_directory + sub_template),
-            template_name = sub_template.replace(/\//g, "_");
-        if (template_name.indexOf(".") > -1) {
-          template_name = template_name.split(".")[0];
-        }
-        options.data[template_name] = content.toString();
-      });
-    }
-
     var languages = (options.vocabs.length < 1) ? [''] : options.vocabs;
     var files = this.files;
     // For each language
@@ -70,9 +59,18 @@ module.exports = function(grunt) {
               special_variables = {
                 vocab_dir: lng
               },
-              data              = _.merge(options.data, vocab_data, special_variables),
-              src               = _.template(grunt.file.read(options.template_directory + f.orig.src[0]), data),
-              dest              = options.output_directory + lng + '/' + f.dest;
+              data = _.merge(options.data, vocab_data, special_variables),
+              src  = _.template(
+                       grunt.file.read(options.template_directory + f.orig.src[0]), 
+                       data,
+                       {
+                         'imports': {
+                           template: function (tmpl) {
+                             return _.template(fs.readFileSync(options.template_directory+tmpl).toString(), data);
+                           }
+                         } 
+                       }),
+              dest = options.output_directory + lng + '/' + f.dest;
 
             // Write the destination file.
             grunt.file.write(dest, src);

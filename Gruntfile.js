@@ -83,7 +83,6 @@ module.exports = function(grunt) {
           vocab_directory:    'test/fixtures/vocabs',
           output_directory:   'test/output/sub_templates',
           template_directory: 'test/fixtures/templates',
-          sub_templates:      ['sub_template_fragment.html.tmpl', 'sub_directory/template_fragment.html.tmpl'],
           data: {
             sub_template_title:    "Title from main template",
             content:               "content from sub template",
