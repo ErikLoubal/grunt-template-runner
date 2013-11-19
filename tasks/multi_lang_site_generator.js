@@ -65,7 +65,7 @@ module.exports = function(grunt) {
                        data,
                        {
                          'imports': {
-                           template: function (tmpl) {
+                           include: function (tmpl) {
                              return _.template(fs.readFileSync(options.template_directory+tmpl).toString(), data);
                            }
                          } 

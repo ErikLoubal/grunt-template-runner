@@ -106,6 +106,16 @@ When the templates run, there are additional template variables available that a
 
 `<%= vocab_dir %>` - name of directory template is being rendered into, e.g. 'english'.
 
+### Sub templates
+
+You can reference other templates with your templates, for example the template `main.tmpl`:
+
+```
+hello <%= include('other_template.tmpl') %>
+```
+
+Will include all the content from the template `other_template.tmpl`.  Sub templates have all the same functionality as normal templates, so you can reference variables and add JavaScript into it. 
+
 ## Thanks
 
 This project was originally forked from Erik Loubal's [grunt-template-runner](https://github.com/ErikLoubal/grunt-template-runner).  This didn't quite do what I wanted it to do, but was an excellent starting point.  This project would have taken MUCH longer with grunt-template-runner, thank you Erik.
