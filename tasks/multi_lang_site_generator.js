@@ -12,6 +12,18 @@ module.exports = function(grunt) {
     ) {
       options.template_directory += '/';
     }
+    if (
+      (options.vocab_directory !== '') && 
+      (options.vocab_directory.substr(-1) !== '/')
+    ) {
+      options.vocab_directory += '/';
+    }
+    if (
+      (options.output_directory !== '') && 
+      (options.output_directory.substr(-1) !== '/')
+    ) {
+      options.output_directory += '/';
+    }
   }
 
   grunt.registerMultiTask('multi_lang_site_generator', 'Create multiple translated sites based on templates and vocab json objects.', function() {
@@ -54,19 +66,13 @@ module.exports = function(grunt) {
         // Iterate over all specified file groups.
         files.forEach(function(f) {
 
-          var vocab_data        = JSON.parse(grunt.file.read(options.vocab_directory + '/' + lng + '.json')),
+          var vocab_data        = JSON.parse(grunt.file.read(options.vocab_directory + lng + '.json')),
               special_variables = {
                 vocab_dir: lng
               },
               data              = _.merge(options.data, vocab_data, special_variables),
               src               = _.template(grunt.file.read(options.template_directory + f.orig.src[0]), data),
-              dest              = '';
-
-            if (options.output_directory) {
-              dest = options.output_directory + '/';
-            }
-
-            dest += lng + '/' + f.dest;
+              dest              = options.output_directory + lng + '/' + f.dest;
 
             // Write the destination file.
             grunt.file.write(dest, src);

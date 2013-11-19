@@ -25,8 +25,8 @@ module.exports = function(grunt) {
       vocabs_to_sites: {
         options: {
           vocabs:           ['english', 'mundo'],
-          vocab_directory:  'test/fixtures/vocabs',
-          output_directory: 'test/output/vocabs_to_sites',
+          vocab_directory:  'test/fixtures/vocabs/',
+          output_directory: 'test/output/vocabs_to_sites/',
         },
         files: {
           'index.html': ['test/fixtures/templates/index.html.tmpl']
@@ -36,7 +36,7 @@ module.exports = function(grunt) {
         options: {
           vocabs:           ['english', 'mundo'],
           vocab_directory:  'test/fixtures/vocabs',
-          output_directory: 'test/output/extra_data',
+          output_directory: 'test/output/extra_data/',
           data: {
             "foo": "bar"
           }
@@ -48,7 +48,7 @@ module.exports = function(grunt) {
       multiple_files: {
         options: {
           vocabs:           ['english'],
-          vocab_directory:  'test/fixtures/vocabs',
+          vocab_directory:  'test/fixtures/vocabs/',
           output_directory: 'test/output/multiple_files'
         },
         files: {
