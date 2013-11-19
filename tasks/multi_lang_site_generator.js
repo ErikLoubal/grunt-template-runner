@@ -32,7 +32,8 @@ module.exports = function(grunt) {
       data:               {},
       output_directory:   false,
       template_directory: '',
-      sub_templates:      ''
+      sub_templates:      '',
+      vocab_directory:    ''
     });
     grunt.verbose.writeflags(options, 'Options');
     

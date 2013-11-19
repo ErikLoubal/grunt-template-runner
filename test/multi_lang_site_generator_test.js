@@ -92,5 +92,4 @@ exports.template_runner = {
 
     test.done();
   }
-  // ADD A TEST FOR VOCAB DIRECTORY
 };
