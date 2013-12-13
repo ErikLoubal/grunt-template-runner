@@ -118,4 +118,4 @@ Will include all the content from the template `other_template.tmpl`.  Sub templ
 
 ## Thanks
 
-This project was originally forked from Erik Loubal's [grunt-template-runner](https://github.com/ErikLoubal/grunt-template-runner).  This didn't quite do what I wanted it to do, but was an excellent starting point.  This project would have taken MUCH longer with grunt-template-runner, thank you Erik.
+This project was originally forked from Erik Loubal's [grunt-template-runner](https://github.com/ErikLoubal/grunt-template-runner).  This didn't quite do what I wanted it to do, but was an excellent starting point.  This project would have taken MUCH longer without grunt-template-runner, thank you Erik.
