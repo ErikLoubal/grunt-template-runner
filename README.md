@@ -122,34 +122,36 @@ Each template is scoped locally, so you cannot reference a JS variable set in a 
 
 ```
 // MAIN.TMPL
-<%
-var age = 18;
-%>
-
-<%= age %> // outputs 18
-<% include("sub_template.tmpl") %>
+<% var title = "Index page"; %>
+<% include("header.tmpl") %>
+<h1><%= title %></h1> // outputs "Index page"
 
 
-// SUB_TEMPLATE.TMPL
-<%= age %> // Throws an error
+// HEADER.TMPL
+<html>
+<head>
+<title><%= title %></title> // Throws an error
+</head>
+<body>
 ```
 
 To pass variables set in your template to included templates, use the optional 2nd parameter in the include call, e.g.
 
 ```
 // MAIN.TMPL
-<%
-var age = 18;
-%>
-
-<%= age %> // outputs 18
-<% include("sub_template.tmpl", {
-  age: age
+<% var title = "Index page"; %>
+<% include("header.tmpl", {
+  title: title
 }) %>
+<h1><%= title %></h1> // outputs "Index page"
 
 
-// SUB_TEMPLATE.TMPL
-<%= age %> // outputs 18
+// HEADER.TMPL
+<html>
+<head>
+<title><%= title %></title> // outputs "Index page"
+</head>
+<body>
 
 ```
 
