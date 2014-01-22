@@ -114,7 +114,45 @@ You can reference other templates with your templates, for example the template 
 hello <%= include('other_template.tmpl') %>
 ```
 
-Will include all the content from the template `other_template.tmpl`.  Sub templates have all the same functionality as normal templates, so you can reference variables and add JavaScript into it. 
+Will include all the content from the template `other_template.tmpl`.  Sub templates have all the same functionality as normal templates, so you can reference the vocabs and add JavaScript into it.
+
+#### Passing values between templates
+
+Each template is scoped locally, so you cannot reference a JS variable set in a template from an included template.  E.g.
+
+```
+// MAIN.TMPL
+<%
+var age = 18;
+%>
+
+<%= age %> // outputs 18
+<% include("sub_template.tmpl") %>
+
+
+// SUB_TEMPLATE.TMPL
+<%= age %> // Throws an error
+```
+
+To pass variables set in your template to included templates, use the optional 2nd parameter in the include call, e.g.
+
+```
+// MAIN.TMPL
+<%
+var age = 18;
+%>
+
+<%= age %> // outputs 18
+<% include("sub_template.tmpl", {
+  age: age
+}) %>
+
+
+// SUB_TEMPLATE.TMPL
+<%= age %> // outputs 18
+
+```
+
 
 ## Thanks
 

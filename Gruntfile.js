@@ -92,8 +92,18 @@ module.exports = function(grunt) {
         files: {
           'index.html': 'sub_templates.html.tmpl'
         }
+      },
+      sub_template_with_parameters: {
+        options: {
+          vocabs:             ['english'],
+          vocab_directory:    'test/fixtures/vocabs',
+          output_directory:   'test/output/sub_template_with_parameters',
+          template_directory: 'test/fixtures/templates'
+        },
+        files: {
+          'index.html': 'sub_template_with_parameters.html.tmpl'
+        }
       }
-      // content from sub template
     },
 
     // Unit tests.

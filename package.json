@@ -1,8 +1,8 @@
 {
   "name": "grunt-multi-lang-site-generator",
   "description": "Runs templates and i18n at grunt's compile time.",
-  "version": "0.1.0",
-  "homepage": "git@github.com:maslen/grunt-template-runner.git",
+  "version": "0.2.0",
+  "homepage": "http://github.com/maslen/grunt-multi-lang-site-generator.git",
   "author": {
     "name": "Tom Maslen",
     "email": "tom_maslen@hotmail.com"

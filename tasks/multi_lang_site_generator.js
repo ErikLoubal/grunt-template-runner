@@ -66,8 +66,10 @@ module.exports = function(grunt) {
                        data,
                        {
                          'imports': {
-                           include: function (tmpl) {
-                             return _.template(fs.readFileSync(options.template_directory+tmpl).toString(), data);
+                           include: function (tmpl, params) {
+                              params = params || {};
+                              var include_data = _.merge(data, params)
+                              return _.template(fs.readFileSync(options.template_directory+tmpl).toString(), include_data);
                            }
                          } 
                        }),

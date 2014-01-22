@@ -91,5 +91,36 @@ exports.template_runner = {
     test.equal(actual, expected, 'should include sub templates and render content');
 
     test.done();
+  },
+  sub_template_with_parameters: function (test) {
+    test.expect(1);
+
+    var actual   = grunt.file.read('test/output/sub_template_with_parameters/english/index.html');
+    var expected = grunt.file.read('test/expected/sub_template_with_parameters/english/index.html');
+    test.equal(actual, expected, 'should include sub template with parameters and render content');
+
+    test.done();
   }
 };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
