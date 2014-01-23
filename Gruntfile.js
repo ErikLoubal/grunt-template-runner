@@ -103,6 +103,17 @@ module.exports = function(grunt) {
         files: {
           'index.html': 'sub_template_with_parameters.html.tmpl'
         }
+      },
+      nested_sub_templates: {
+        options: {
+          vocabs:             ['english'],
+          vocab_directory:    'test/fixtures/vocabs',
+          output_directory:   'test/output/nested_sub_templates',
+          template_directory: 'test/fixtures/templates'
+        },
+        files: {
+          'index.html': 'nested_sub_template_1.html.tmpl'
+        }
       }
     },
 

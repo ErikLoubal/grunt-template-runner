@@ -100,6 +100,15 @@ exports.template_runner = {
     test.equal(actual, expected, 'should include sub template with parameters and render content');
 
     test.done();
+  },
+  nested_sub_templates: function (test) {
+    test.expect(1);
+
+    var actual   = grunt.file.read('test/output/nested_sub_templates/english/index.html');
+    var expected = grunt.file.read('test/expected/nested_sub_templates/english/index.html');
+    test.equal(actual, expected, 'should include a sub template within a sub template');
+
+    test.done();
   }
 };
 

@@ -69,7 +69,19 @@ module.exports = function(grunt) {
                            include: function (tmpl, params) {
                               params = params || {};
                               var include_data = _.merge(data, params)
-                              return _.template(fs.readFileSync(options.template_directory+tmpl).toString(), include_data);
+                              return _.template(
+                                fs.readFileSync(options.template_directory+tmpl).toString(), 
+                                include_data,
+                                {
+                                 'imports': {
+                                   include: function (tmpl, params) {
+                                     params = params || {};
+                                     var include_data = _.merge(data, params);
+                                     return _.template(fs.readFileSync(options.template_directory+tmpl).toString(), include_data);
+                                   }
+                                 } 
+                               }
+                              );
                            }
                          } 
                        }),
