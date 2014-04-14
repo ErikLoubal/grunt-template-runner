@@ -1,11 +1,3 @@
-/*
- * grunt-template-runner
- * https://github.com/ErikLoubal/grunt-template-runner
- *
- * Copyright (c) 2013 Erik Loubal
- * Licensed under the MIT license.
- */
-
 'use strict';
 
 module.exports = function(grunt) {
@@ -25,62 +17,104 @@ module.exports = function(grunt) {
 
     // Before generating any new files, remove any previously-created files.
     clean: {
-      tests: ['tmp'],
+      tests: ['test/output'],
     },
 
     // Configuration to be run (and then tested).
-    template_runner: {
-      bare_template: {
+    multi_lang_site_generator: {
+      vocabs_to_sites: {
         options: {
-          i18n: false,
-          data: {name : 'content'}
+          vocabs:           ['english', 'mundo'],
+          vocab_directory:  'test/fixtures/vocabs/',
+          output_directory: 'test/output/vocabs_to_sites/',
         },
         files: {
-          'tmp/default.txt': ['test/fixtures/default.txt'],
-        },
+          'index.html': ['test/fixtures/templates/index.html.tmpl']
+        }
       },
-      basic_i18n: {
+      extra_data_to_sites: {
         options: {
-          locales: ['en', 'fr'],
-          directory: 'test/fixtures/locales'
+          vocabs:           ['english', 'mundo'],
+          vocab_directory:  'test/fixtures/vocabs',
+          output_directory: 'test/output/extra_data/',
+          data: {
+            "foo": "bar"
+          }
         },
         files: {
-          'tmp/basic.html': ['test/fixtures/basic.html'],
-        },
+          'index.html': 'test/fixtures/templates/extra_data.html.tmpl'
+        }
       },
-      no_extension: {
-          options: {
-            locales: ['en'],
-            directory: 'test/fixtures/locales'
-          },
-          files: {
-            'tmp/no_extension': ['test/fixtures/basic.html'],
-          },
-        },
-      folder: {
+      multiple_files: {
         options: {
-          locales: ['en', 'fr'],
-          directory: 'test/fixtures/locales'
+          vocabs:           ['english'],
+          vocab_directory:  'test/fixtures/vocabs/',
+          output_directory: 'test/output/multiple_files'
         },
         files: {
-          'tmp/folder/': ['test/fixtures/folder/test1.html', 
-                          'test/fixtures/folder/test2.hbs', 
-                          'test/fixtures/folder/test3.md'],
-        },
+          'index.html': 'test/fixtures/templates/index.html.tmpl',
+          'page.html':  'test/fixtures/templates/page.html.tmpl'
+        }
       },
-      gettext: {
-          options: {
-            locales: ['en', 'fr'],
-            directory: 'test/gettext',
-            gettext: 'default',
-            gettext_suffix: 'po'
-          },
-          files: {
-            'tmp/fg/': ['test/fixtures/folder/test1.html', 
-                        'test/fixtures/folder/test2.hbs', 
-                        'test/fixtures/folder/test3.md'],
-          },
+      template_directory_option: {
+        options: {
+          vocabs:             ['english'],
+          vocab_directory:    'test/fixtures/vocabs',
+          output_directory:   'test/output/template_directory_option',
+          template_directory: 'test/fixtures/templates/'
         },
+        files: {
+          'index.html': 'index.html.tmpl'
+        }
+      },
+      special_variables: {
+        options: {
+          vocabs:             ['english'],
+          vocab_directory:    'test/fixtures/vocabs',
+          output_directory:   'test/output/special_variables'
+        },
+        files: {
+          'special_variables.html': 'test/fixtures/templates/special_variables.html.tmpl'
+        }
+      },
+      sub_templates: {
+        options: {
+          vocabs:             ['english'],
+          vocab_directory:    'test/fixtures/vocabs',
+          output_directory:   'test/output/sub_templates',
+          template_directory: 'test/fixtures/templates',
+          data: {
+            sub_template_title:    "Title from main template",
+            content:               "content from sub template",
+            sub_directory_content: "content from sub directory template"
+          }
+        },
+        files: {
+          'index.html': 'sub_templates.html.tmpl'
+        }
+      },
+      sub_template_with_parameters: {
+        options: {
+          vocabs:             ['english'],
+          vocab_directory:    'test/fixtures/vocabs',
+          output_directory:   'test/output/sub_template_with_parameters',
+          template_directory: 'test/fixtures/templates'
+        },
+        files: {
+          'index.html': 'sub_template_with_parameters.html.tmpl'
+        }
+      },
+      nested_sub_templates: {
+        options: {
+          vocabs:             ['english'],
+          vocab_directory:    'test/fixtures/vocabs',
+          output_directory:   'test/output/nested_sub_templates',
+          template_directory: 'test/fixtures/templates'
+        },
+        files: {
+          'index.html': 'nested_sub_template_1.html.tmpl'
+        }
+      }
     },
 
     // Unit tests.
@@ -100,7 +134,7 @@ module.exports = function(grunt) {
 
   // Whenever the "test" task is run, first clean the "tmp" dir, then run this
   // plugin's task(s), then test the result.
-  grunt.registerTask('test', ['clean', 'template_runner', 'nodeunit']);
+  grunt.registerTask('test', ['clean', 'multi_lang_site_generator', 'nodeunit']);
 
   // By default, lint and run all tests.
   grunt.registerTask('default', ['jshint', 'test']);

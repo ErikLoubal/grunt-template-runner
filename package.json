@@ -1,25 +1,19 @@
 {
-  "name": "grunt-template-runner",
+  "name": "grunt-multi-lang-site-generator",
   "description": "Runs templates and i18n at grunt's compile time.",
   "version": "0.2.1",
-  "homepage": "https://github.com/ErikLoubal/grunt-template-runner",
+  "homepage": "http://github.com/BBCVisualJournalism/grunt-multi-lang-site-generator.git",
   "author": {
-    "name": "Erik Loubal",
-    "email": "erik.loubal@gmx.com"
+    "name": "Tom Maslen",
+    "email": "tom_maslen@hotmail.com"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/ErikLoubal/grunt-template-runner.git"
+    "url": "https://github.com/BBCVisualJournalism/grunt-multi-lang-site-generator.git"
   },
   "bugs": {
-    "url": "https://github.com/ErikLoubal/grunt-template-runner/issues"
+    "url": "https://github.com/BBCVisualJournalism/grunt-multi-lang-site-generator/issues"
   },
-  "licenses": [
-    {
-      "type": "MIT",
-      "url": "https://github.com/ErikLoubal/grunt-template-runner/blob/master/LICENSE-MIT"
-    }
-  ],
   "main": "Gruntfile.js",
   "engines": {
     "node": ">= 0.8.0"
@@ -28,18 +22,14 @@
     "test": "grunt test"
   },
   "dependencies": {
-    "underscore": "~1.2.0",
-    "i18n": "~0.4.0",
-    "node-gettext": "~0.2.10"
+    "lodash": "~2.2.1"
   },
   "devDependencies": {
-    "grunt-contrib-jshint": "~0.1.1",
-    "grunt-contrib-clean": "~0.4.0",
+    "grunt-contrib-jshint":   "~0.1.1",
+    "grunt-contrib-clean":    "~0.4.0",
     "grunt-contrib-nodeunit": "~0.1.2",
-    "grunt": "~0.4.1"
-  },
-  "peerDependencies": {
-    "grunt": "~0.4.1"
+    "grunt":                  "~0.4.1",
+    "lodash":                 "~2.2.1"
   },
   "keywords": [
     "gruntplugin",
