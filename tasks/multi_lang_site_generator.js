@@ -6,27 +6,27 @@ module.exports = function(grunt) {
       fs = require("fs");
 
   function add_forward_slash_to_end_of_dir_paths (options) {
-    if (
-      (options.template_directory !== '') && 
-      (options.template_directory.substr(-1) !== '/')
-    ) {
-      options.template_directory += '/';
-    }
-    if (
-      (options.vocab_directory !== '') && 
-      (options.vocab_directory.substr(-1) !== '/')
-    ) {
-      options.vocab_directory += '/';
-    }
-    if (
-      (options.output_directory !== '') && 
-      (options.output_directory.substr(-1) !== '/')
-    ) {
-      options.output_directory += '/';
-    }
+    options.template_directory = do_the_forward_slash_adding(options.template_directory);
+    options.vocab_directory    = do_the_forward_slash_adding(options.vocab_directory);
+    options.output_directory   = do_the_forward_slash_adding(options.output_directory);
   }
 
-  grunt.registerMultiTask('multi_lang_site_generator', 'Create multiple translated sites based on templates and vocab json objects.', function() {
+  function do_the_forward_slash_adding (directory) {
+    if (
+      (directory !== '') && 
+      (directory.substr(-1) !== '/')
+    ) {
+      directory += '/';
+    }
+    return directory;
+  }
+
+  function we_dont_have (object) {
+    return object.length < 1;
+  }
+
+  grunt.registerMultiTask('multi_lang_site_generator', 'Create multiple translated sites based on templates and vocab json objects.', function () {
+    
     var options = this.options({
       vocabs :            [],
       data:               {},
@@ -35,26 +35,27 @@ module.exports = function(grunt) {
       sub_templates:      '',
       vocab_directory:    ''
     });
+
     grunt.verbose.writeflags(options, 'Options');
     
-
-    if (options.vocabs.length < 1) {
+    if (we_dont_have(options.vocabs)) {
       grunt.log.warn('Cannot run without any vocabs defined.');
     }
 
-    if (this.files.length < 1) {
+    if (we_dont_have(this.files)) {
       grunt.log.warn('Destination not written because no source files were provided.');
     }
 
     add_forward_slash_to_end_of_dir_paths(options);
 
-    var languages = (options.vocabs.length < 1) ? [''] : options.vocabs;
-    var files = this.files;
+    var languages = (options.vocabs.length < 1) ? [''] : options.vocabs,
+        files = this.files;
+
     // For each language
-    languages.forEach(function(lng) {
+    languages.forEach(function (lng) {
 
         // Iterate over all specified file groups.
-        files.forEach(function(f) {
+        files.forEach(function (f) {
 
           var vocab_data        = JSON.parse(grunt.file.read(options.vocab_directory + lng + '.json')),
               special_variables = {
@@ -70,14 +71,14 @@ module.exports = function(grunt) {
                               params = params || {};
                               var include_data = _.merge(data, params)
                               return _.template(
-                                fs.readFileSync(options.template_directory+tmpl).toString(), 
-                                include_data,
+                                fs.readFileSync(options.template_directory + tmpl).toString(), include_data,
                                 {
                                  'imports': {
                                    include: function (tmpl, params) {
                                      params = params || {};
                                      var include_data = _.merge(data, params);
-                                     return _.template(fs.readFileSync(options.template_directory+tmpl).toString(), include_data);
+                                     return _.template(
+                                      fs.readFileSync(options.template_directory + tmpl).toString(), include_data);
                                    }
                                  } 
                                }
@@ -87,13 +88,11 @@ module.exports = function(grunt) {
                        }),
               dest = options.output_directory + lng + '/' + f.dest;
 
-            // Write the destination file.
-            grunt.file.write(dest, src);
-            grunt.log.writeln('File "' + dest + '" created.');
+        // Write the destination file.
+        grunt.file.write(dest, src);
+        grunt.log.writeln('File "' + dest + '" created.');
 
-        });
-
+      });
     });
   });
-
 };
