@@ -155,6 +155,51 @@ To pass variables set in your template to included templates, use the optional 2
 
 ```
 
+### User defined functions and passed in data
+
+Any data passed in from the vocab files or the optional `data` parameter are available as local variables within the templates and sub templates.
+
+Unfortunately they are not available within the closure of functions that are defined within your templates.  For example, if you ran this grunt config setup and template:
+
+```
+grunt.initConfig({
+  multi_lang_site_generator: {
+    default: {
+      options: {
+        vocabs:           ['english', 'mundo'],
+        vocab_directory:  'test/fixtures/vocabs',
+        output_directory: 'test/output/extra_data/',
+        data: {
+          "foo": "bar"
+        }
+      },
+      files: {
+        'index.html': 'templates/index.html.tmpl'
+      }
+    }
+  }
+});
+
+// index.html.tmpl
+console.log(foo); // outputs "bar";
+function subFunc() {
+  console.log(foo); // returns undefined
+}
+subFunc();
+```
+
+The var `foo` passed in from the data option would be recognised in the scope of the module (i.e. file (files are modules in node.js)) but would not be recognised in the scope of the user defined function `subFunc`.
+
+Thankfully lo-dash.js has an object called `obj` which is referenceable anywhere in the template.  So changing the example to this makes the var `foo` referenceable in the user defined function:
+
+```
+// index.html.tmpl
+console.log(foo); // outputs "bar";
+function subFunc() {
+  console.log(obj.foo); // returns "bar"
+}
+subFunc();
+```
 
 ## Thanks
 
