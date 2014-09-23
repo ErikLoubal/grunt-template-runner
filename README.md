@@ -184,6 +184,29 @@ grunt.initConfig({
 })
 ```
 
+---
+#### Locale-Named Sub Directories
+
+You can set options.subDir to "true" in order to put generated templates in
+locale specific directories instead of altering the filenames.
+
+Thus tmp/basic_en.html becomes tmp/en/basic.html
+
+```js
+grunt.initConfig({
+  template_runner: {
+    options: {
+      locales: ['en'],
+      subDir: true,
+      directory: 'locales'
+    },
+    files: {
+      'dest/': ['src/basic.html', 'src/another.hbs'],
+    },
+  },
+})
+```
+
 ## Contributing
 In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [Grunt](http://gruntjs.com/).
 

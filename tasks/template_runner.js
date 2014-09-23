@@ -22,6 +22,7 @@ module.exports = function(grunt) {
       i18n: true,
       locales : [],
       directory: 'locales',
+      subDir: null,
       extension: null,
       gettext: null,
       gettext_suffix: 'mo',
@@ -123,8 +124,9 @@ module.exports = function(grunt) {
               for(var i = 0; i < src.length; i++){
                   var srcFile = f.src[i];
                   var filename = f.dest + '/'; 
+                  if(options.subDir) filename += lng + '/'
                   if(options.i18n && lng.length > 0){
-                      filename += getOutputName(srcFile.replace(/^.*[\\\/]/, ''), lng, options.extension);
+                      filename += getOutputName(srcFile.replace(/^.*[\\\/]/, ''), lng, options.extension,options.subDir);
                   } else {
                       filename += getOutputName(srcFile.replace(/^.*[\\\/]/, ''), '', options.extension);
                   }
@@ -145,20 +147,24 @@ module.exports = function(grunt) {
     });
   });
 
-  var getOutputName = function(n, lng, extension) {
+  var getOutputName = function(n, lng, extension, subDir) {
       var name = n;
       var idx = n.lastIndexOf('.');
       if(idx > -1){
         if(extension || typeof extension === "string"){
             name = n.slice(0, idx) + '_' + lng + extension;
+            if (subDir) name = n.slice(0, idx) + extension;
         } else {
           name = n.slice(0, idx) + '_' + lng + n.slice(idx);
+          if (subDir) name = n.slice(0, idx) + n.slice(idx);
         }
       } else {
           if(extension || typeof extension === "string"){
           name = n + '_' + lng + extension;
+          if (subDir) name = n + extension;
         } else {
           name = n + '_' + lng;
+          if (subDir) name = n
         }
       }
       return name;

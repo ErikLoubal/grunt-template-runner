@@ -48,6 +48,16 @@ module.exports = function(grunt) {
           'tmp/basic.html': ['test/fixtures/basic.html'],
         },
       },
+      subdir_i18n: {
+        options: {
+          locales: ['en', 'fr'],
+          subDir: true,
+          directory: 'test/fixtures/locales'
+        },
+        files: {
+          'tmp/': ['test/fixtures/basic.html'],
+        },
+      },
       no_extension: {
           options: {
             locales: ['en'],
