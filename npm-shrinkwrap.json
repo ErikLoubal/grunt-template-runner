@@ -47,13 +47,13 @@
     },
     "nodeunit": {
       "version": "0.9.0",
-      "from": "nodeunit@",
+      "from": "https://registry.npmjs.org/nodeunit/-/nodeunit-0.9.0.tgz",
       "resolved": "https://registry.npmjs.org/nodeunit/-/nodeunit-0.9.0.tgz",
       "dependencies": {
         "tap": {
-          "version": "0.4.12",
+          "version": "0.4.13",
           "from": "tap@>=0.2.3",
-          "resolved": "https://registry.npmjs.org/tap/-/tap-0.4.12.tgz",
+          "resolved": "https://registry.npmjs.org/tap/-/tap-0.4.13.tgz",
           "dependencies": {
             "buffer-equal": {
               "version": "0.0.1",
@@ -92,11 +92,6 @@
               "from": "glob@~3.2.1",
               "resolved": "https://registry.npmjs.org/glob/-/glob-3.2.11.tgz",
               "dependencies": {
-                "inherits": {
-                  "version": "2.0.1",
-                  "from": "inherits@2",
-                  "resolved": "https://registry.npmjs.org/inherits/-/inherits-2.0.1.tgz"
-                },
                 "minimatch": {
                   "version": "0.3.0",
                   "from": "minimatch@0.3",
@@ -118,7 +113,8 @@
             },
             "inherits": {
               "version": "2.0.1",
-              "from": "inherits@*"
+              "from": "inherits@*",
+              "resolved": "https://registry.npmjs.org/inherits/-/inherits-2.0.1.tgz"
             },
             "mkdirp": {
               "version": "0.5.0",
@@ -181,8 +177,9 @@
               "resolved": "https://registry.npmjs.org/slide/-/slide-1.1.6.tgz"
             },
             "yamlish": {
-              "version": "0.0.5",
-              "from": "yamlish@*"
+              "version": "0.0.6",
+              "from": "yamlish@*",
+              "resolved": "https://registry.npmjs.org/yamlish/-/yamlish-0.0.6.tgz"
             }
           }
         }
