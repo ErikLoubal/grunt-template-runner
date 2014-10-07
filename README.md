@@ -83,6 +83,12 @@ Default value: `true`
 
 If true internationalization will be used, otherwise the bare templating rendering is used.
 
+#### i18n_options
+Type: `Object`
+Default value: `{}`
+
+Pass additional options to i18n.
+
 #### locales
 Type: `String|Array`
 Default value: `[]`
