@@ -48,6 +48,19 @@ exports.template_runner = {
 
     test.done();
   },
+  subDir_i18n: function(test) {
+    test.expect(2);
+
+    var actual = grunt.file.read('tmp/en/basic.html');
+    var expected = grunt.file.read('test/expected/basic_en.html');
+    test.equal(actual, expected, 'should use default key string as i18n.');
+    
+    actual = grunt.file.read('tmp/fr/basic.html');
+    expected = grunt.file.read('test/expected/basic_fr.html');
+    test.equal(actual, expected, 'should apply i18n (fr).');
+
+    test.done();
+  },
   no_extension: function(test) {
     test.expect(1);
 

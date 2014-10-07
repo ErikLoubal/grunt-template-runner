@@ -83,6 +83,12 @@ Default value: `true`
 
 If true internationalization will be used, otherwise the bare templating rendering is used.
 
+#### i18n_options
+Type: `Object`
+Default value: `{}`
+
+Pass additional options to i18n.
+
 #### locales
 Type: `String|Array`
 Default value: `[]`
@@ -179,6 +185,29 @@ grunt.initConfig({
     },
     files: {
       'dest/myDest.txt': ['src/mySource.txt'],
+    },
+  },
+})
+```
+
+---
+#### Locale-Named Sub Directories
+
+You can set options.subDir to "true" in order to put generated templates in
+locale specific directories instead of altering the filenames.
+
+Thus tmp/basic_en.html becomes tmp/en/basic.html
+
+```js
+grunt.initConfig({
+  template_runner: {
+    options: {
+      locales: ['en'],
+      subDir: true,
+      directory: 'locales'
+    },
+    files: {
+      'dest/': ['src/basic.html', 'src/another.hbs'],
     },
   },
 })
