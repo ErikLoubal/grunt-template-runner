@@ -33,8 +33,8 @@ exports.template_runner = {
     var expected = grunt.file.read('test/expected/vocabs_to_sites/english/index.html');
     test.equal(actual, expected, 'should create an english version of the site');
     
-    var actual =   grunt.file.read('test/output/vocabs_to_sites/mundo/index.html');
-    var expected = grunt.file.read('test/expected/vocabs_to_sites/mundo/index.html');
+    actual =   grunt.file.read('test/output/vocabs_to_sites/mundo/index.html');
+    expected = grunt.file.read('test/expected/vocabs_to_sites/mundo/index.html');
     test.equal(actual, expected, 'should create a mundo version of the site');
 
     test.done();
@@ -46,8 +46,8 @@ exports.template_runner = {
     var expected = grunt.file.read('test/expected/extra_data/english/index.html');
     test.equal(actual, expected, 'should create an english version of the site with extra data from the grunt file');
     
-    var actual =   grunt.file.read('test/output/extra_data/mundo/index.html');
-    var expected = grunt.file.read('test/expected/extra_data/mundo/index.html');
+    actual =   grunt.file.read('test/output/extra_data/mundo/index.html');
+    expected = grunt.file.read('test/expected/extra_data/mundo/index.html');
     test.equal(actual, expected, 'should create a mundo version of the site with extra data from the grunt file');
 
     test.done();
@@ -59,8 +59,8 @@ exports.template_runner = {
     var expected = grunt.file.read('test/expected/multiple_files/english/index.html');
     test.equal(actual, expected, 'should create an index file');
     
-    var actual =   grunt.file.read('test/output/multiple_files/english/page.html');
-    var expected = grunt.file.read('test/expected/multiple_files/english/page.html');
+    actual =   grunt.file.read('test/output/multiple_files/english/page.html');
+    expected = grunt.file.read('test/expected/multiple_files/english/page.html');
     test.equal(actual, expected, 'should create a page file');
 
     test.done();
@@ -107,6 +107,33 @@ exports.template_runner = {
     var actual   = grunt.file.read('test/output/nested_sub_templates/english/index.html');
     var expected = grunt.file.read('test/expected/nested_sub_templates/english/index.html');
     test.equal(actual, expected, 'should include a sub template within a sub template');
+
+    test.done();
+  },
+  bb_code: function (test) {
+    test.expect(4);
+
+    var actual =   grunt.file.read('test/output/bb_code/english/bb_code_bold.html');
+    var expected = grunt.file.read('test/expected/bb_code/english/bb_code_bold.html');
+
+    test.equal(actual, expected, 'should parse {B} and {/B} into strong tags');
+
+
+    actual =   grunt.file.read('test/output/bb_code/english/bb_code_paragraph.html');
+    expected = grunt.file.read('test/expected/bb_code/english/bb_code_paragraph.html');
+
+    test.equal(actual, expected, 'should parse {P} and {/P} into paragraph tags');
+
+
+    actual =   grunt.file.read('test/output/bb_code/english/bb_code_url.html');
+    expected = grunt.file.read('test/expected/bb_code/english/bb_code_url.html');
+
+    test.equal(actual, expected, 'should parse {URL=X}Y{/URL} into a href tag (<a href="X">Y</a>)');
+
+    actual =   grunt.file.read('test/output/bb_code/english/bb_code_mixed.html');
+    expected = grunt.file.read('test/expected/bb_code/english/bb_code_mixed.html');
+
+    test.equal(actual, expected, 'should parse multiple BB in a vocab into mark up');
 
     test.done();
   }
