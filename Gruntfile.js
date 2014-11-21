@@ -114,6 +114,19 @@ module.exports = function(grunt) {
         files: {
           'index.html': 'nested_sub_template_1.html.tmpl'
         }
+      },
+      bb_code: {
+        options: {
+          vocabs:           ['english'],
+          vocab_directory:  'test/fixtures/vocabs/',
+          output_directory: 'test/output/bb_code'
+        },
+        files: {
+          'bb_code_bold.html': 'test/fixtures/templates/bb_code_bold.html.tmpl',
+          'bb_code_paragraph.html': 'test/fixtures/templates/bb_code_paragraph.html.tmpl',
+          'bb_code_url.html': 'test/fixtures/templates/bb_code_url.html.tmpl',
+          'bb_code_mixed.html': 'test/fixtures/templates/bb_code_mixed.html.tmpl',
+        }
       }
     },
 

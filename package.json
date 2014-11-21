@@ -1,12 +1,15 @@
 {
   "name": "grunt-multi-lang-site-generator",
   "description": "Runs templates and i18n at grunt's compile time.",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "homepage": "http://github.com/BBCVisualJournalism/grunt-multi-lang-site-generator.git",
-  "author": {
+  "contributors": [{
     "name": "Tom Maslen",
     "email": "tom_maslen@hotmail.com"
-  },
+  }, {
+    "name": "Aidan Fewster",
+    "email": "fewstera@gmail.com"
+  }],
   "repository": {
     "type": "git",
     "url": "https://github.com/BBCVisualJournalism/grunt-multi-lang-site-generator.git"
