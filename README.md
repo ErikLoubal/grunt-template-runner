@@ -201,6 +201,42 @@ function subFunc() {
 subFunc();
 ```
 
+### BB Code
+
+You can use Bulletin Board (BB) inside of vocabs, the BB code will be replaced with HTML markup when generating. Currently supported BB code's are strong, paragraphs and URL's.
+
+### Paragraph tags
+```
+{P}This is a paragraph.{/P}
+```
+Will generate
+```
+<p>This is a paragraph.</p>
+```
+
+### Bold tags
+```
+This sentence contains {B}important information{/B} 
+```
+Will generate
+```
+This sentence contains <strong>important information</strong> 
+```
+
+
+### URL tags
+
+A URL tag must contain a URL parameter and must surround the content that will become a link.
+
+```
+Check out this {URL=http://example.com}example{/URL}
+```
+Will generate
+```
+Check out this <a href="http://example.com">example</a> 
+```
+
+
 ## Thanks
 
 This project was originally forked from Erik Loubal's [grunt-template-runner](https://github.com/ErikLoubal/grunt-template-runner).  This didn't quite do what I wanted it to do, but was an excellent starting point.  This project would have taken MUCH longer without grunt-template-runner, thank you Erik.
