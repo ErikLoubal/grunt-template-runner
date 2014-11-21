@@ -205,6 +205,8 @@ subFunc();
 
 You can use Bulletin Board (BB) inside of vocabs, the BB code will be replaced with HTML markup when generating. Currently supported BB code's are strong, paragraphs and URL's.
 
+The generator will firstly process the BB code into markup. The processed vocabs are then passed to lodash's template method to generate the final markup files. Therefore you can **only use BB code inside vocab files** and not the template files. 
+
 ### Paragraph tags
 ```
 {P}This is a paragraph.{/P}
@@ -235,6 +237,7 @@ Will generate
 ```
 Check out this <a href="http://example.com">example</a> 
 ```
+
 
 
 ## Thanks
