@@ -51,6 +51,19 @@ module.exports = function(grunt) {
     return parsed_vocabs;
   }
 
+  function get_list_of_languages (vocabs, vocab_directory) {
+    var list_of_languages = [];
+    if (vocabs == '*') {
+      return _.map(fs.readdirSync(vocab_directory), function (fileName) {
+        return fileName.replace('.json', '');
+      });
+    }
+    if (vocabs.length > 0) {
+      return vocabs;
+    }
+    return [''];
+  }
+
   grunt.registerMultiTask('multi_lang_site_generator', 'Create multiple translated sites based on templates and vocab json objects.', function () {
     
     var options = this.options({
@@ -74,7 +87,7 @@ module.exports = function(grunt) {
 
     add_forward_slash_to_end_of_dir_paths(options);
 
-    var languages = (options.vocabs.length < 1) ? [''] : options.vocabs,
+    var languages = get_list_of_languages(options.vocabs, options.vocab_directory),
         files = this.files;
 
     // For each language

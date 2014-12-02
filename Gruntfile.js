@@ -127,6 +127,16 @@ module.exports = function(grunt) {
           'bb_code_url.html': 'test/fixtures/templates/bb_code_url.html.tmpl',
           'bb_code_mixed.html': 'test/fixtures/templates/bb_code_mixed.html.tmpl',
         }
+      },
+      render_all_vocabs: {
+        options: {
+          vocabs:           ['*'],
+          vocab_directory:  'test/fixtures/vocabs/',
+          output_directory: 'test/output/render_all_vocabs'
+        },
+        files: {
+          'index.html': 'test/fixtures/templates/render_all_vocabs.html.tmpl'
+        }
       }
     },
 
