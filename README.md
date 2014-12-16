@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/BBCVisualJournalism/grunt-multi-lang-site-generator.svg)](https://travis-ci.org/BBCVisualJournalism/grunt-multi-lang-site-generator)
+
 # grunt-multi-lang-site-generator
 
 Creates multiple language versions of a site based on vocab JSON files and templates.  Example:
