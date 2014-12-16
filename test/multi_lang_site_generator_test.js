@@ -116,6 +116,23 @@ exports.template_runner = {
 
         test.done();
     },
+    render_all_vocabs: function (test) {
+        var vocabs_to_test = ['arabic', 'chinese', 'english', 'mundo'],
+            actual,
+            expected,
+            current_language;
+
+        test.expect(vocabs_to_test.length);
+
+        for (var i = 0; i < vocabs_to_test.length; i++) {
+            current_language = vocabs_to_test[i];
+            actual           = grunt.file.read('test/output/render_all_vocabs/' + current_language + '/index.html');
+            expected         = grunt.file.read('test/expected/render_all_vocabs/' + current_language + '/index.html');
+            test.equal(actual, expected, 'should create an ' + current_language + ' version of the site');         
+        }
+        
+        test.done();
+    },
     bb_code: function (test) {
         test.expect(4);
 
