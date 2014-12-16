@@ -75,7 +75,7 @@ Default value: `{}`
 
 Mandatory list of languages to use to make a translated site with.  Each item in the array must correspond to a JSON file in the vocab directory.  Each item label will be used to name the language site directory with.
 
-Use the value `['*']` if you want to render all vocabs in your vocab directory.
+Use the value `['*']` or `'*'` if you want to render all vocabs in your vocab directory.
 
 #### vocab_directory
 Type: `String`
