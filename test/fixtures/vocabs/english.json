@@ -1,0 +1,8 @@
+{
+	"title": "Page title",
+	"text": "Page texty text",
+	"bbCodeBold": "{B}This is bold text{/B}",
+	"bbCodeParagraph": "{P}This a paragraph{/P}",
+	"bbCodeUrl": "{URL=http://bbc.co.uk/}This is a link{/URL}",
+	"bbCodeMixed": "{P}This is the first paragraph, this paragraph contains {URL=http://bbc.co.uk/}a link{/URL}{/P}{p}This second paragraph contains {b}bolded{/b} text.{/p}"
+}
