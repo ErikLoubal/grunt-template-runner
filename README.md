@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/BBCVisualJournalism/grunt-multi-lang-site-generator.svg)](https://travis-ci.org/BBCVisualJournalism/grunt-multi-lang-site-generator)
+[![NPM](https://nodei.co/npm/grunt-multi-lang-site-generator.png?compact=true)](https://www.npmjs.com/package/grunt-multi-lang-site-generator) [![Build Status](https://travis-ci.org/BBCVisualJournalism/grunt-multi-lang-site-generator.svg)](https://travis-ci.org/BBCVisualJournalism/grunt-multi-lang-site-generator)
 
 # grunt-multi-lang-site-generator
 
