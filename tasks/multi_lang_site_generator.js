@@ -119,7 +119,7 @@ module.exports = function (grunt) {
         /* matchs {URL=X}Y{/URL} to generate a href tag */
         var urlArray = vocabItem.match(/\{URL=(.*)\}(.*)\{\/URL\}/i);
         if (urlArray !== null){
-            var hrefTag = '<a href="' + urlArray[1] + '">' + urlArray[2] + '</a>';
+            var hrefTag = '<a href="' + urlArray[1] + '" target="_top">' + urlArray[2] + '</a>';
             vocabItem = vocabItem.replace(urlArray[0], hrefTag);
         }
 
