@@ -18,6 +18,10 @@ module.exports = function (grunt) {
             languages = get_list_of_languages(options.vocabs, options.vocab_directory),
             files     = this.files;
 
+        if (!!options.templatetoken) {
+            updateLodashTemplateTokenSettings(options.templatetoken);
+        }
+
         validate_options(grunt, options, files);
 
         languages.forEach(function (lng) {
@@ -26,6 +30,18 @@ module.exports = function (grunt) {
             });
         });
     });
+
+    function updateLodashTemplateTokenSettings (token) {
+        if(typeof token.evaluate !== 'undefined') {
+            _.templateSettings.evaluate = token.evaluate;
+        }
+        if(typeof token.interpolate !== 'undefined') {
+            _.templateSettings.interpolate = token.interpolate;
+        }
+        if(typeof token.escape !== 'undefined') {
+            _.templateSettings.escape = token.escape;
+        }
+    }
 
     function get_list_of_languages (vocabs, vocab_directory) {
         var list_of_languages = [];
